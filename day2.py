@@ -26,8 +26,6 @@ def calc_order(filename):
     l = int(line_split[0])
     w = int(line_split[1])
     h = int(line_split[2])
-    #debug: print l/w/h
-    #print "L: " + str(l) + ", W: " + str(w) + ", H: " + str(h)
     #find out the largest side to determine what 2 sides make up smallest area
     subtotal = 0
     if l > w and l > h:
