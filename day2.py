@@ -35,6 +35,7 @@ def calc_order(filename):
     else:
       subtotal = 2*l*w + 2*w*h + 2*h*l + l*w
     total = total + subtotal
+  f.close()
   return total
 
 def main():
