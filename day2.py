@@ -63,8 +63,8 @@ def main():
     print 'Please specify an input file'
     sys.exit(1)
   
-  #paper = calc_paper(sys.argv[1])
-  #print "Santa's elves must order " + str(paper) + " sq.ft. of paper."
+  paper = calc_paper(sys.argv[1])
+  print "Santa's elves must order " + str(paper) + " sq.ft. of paper."
 
   ribbon = calc_ribbon(sys.argv[1])
   print "Santa's elves must order " + str(ribbon) + " ft. of ribbon."
