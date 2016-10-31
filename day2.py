@@ -27,13 +27,17 @@ def calc_order(filename):
     w = int(line_split[1])
     h = int(line_split[2])
     #find out the largest side to determine what 2 sides make up smallest area
-    subtotal = 0
-    if l > w and l > h:
-      subtotal = 2*l*w + 2*w*h + 2*h*l + w*h
-    elif w > l and w > h:
-      subtotal = 2*l*w + 2*w*h + 2*h*l + l*h
-    else:
-      subtotal = 2*l*w + 2*w*h + 2*h*l + l*w
+    subtotal = 2*l*w + 2*w*h + 2*h*l
+    subtotal = subtotal + min(l*w, w*h, h*l)
+    #if statements are annoying, let's skip em
+    #if l > w and l > h:
+    #  subtotal = 2*l*w + 2*w*h + 2*h*l + w*h
+    #elif w > l and w > h:
+    #  subtotal = 2*l*w + 2*w*h + 2*h*l + l*h
+    #else:
+    #  subtotal = 2*l*w + 2*w*h + 2*h*l + l*w
+    
+    
     total = total + subtotal
   f.close()
   return total
@@ -43,8 +47,10 @@ def main():
     print 'Please specify an input file'
     sys.exit(1)
   
-  total = calc_order(sys.argv[1])
-  print "Santa's elves must order " + str(total) + " sq.ft. of paper."
+  paper = calc_order(sys.argv[1])
+  print "Santa's elves must order " + str(paper) + " sq.ft. of paper."
+
+  
 
 if __name__ == '__main__':
   main()
