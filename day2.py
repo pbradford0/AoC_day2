@@ -3,7 +3,7 @@
 
 import sys
 
-def calc_order(filename):
+def calc_paper(filename):
   #loop through the file, separate each int
   l = 0
   w = 0
@@ -26,18 +26,34 @@ def calc_order(filename):
     l = int(line_split[0])
     w = int(line_split[1])
     h = int(line_split[2])
-    #find out the largest side to determine what 2 sides make up smallest area
+    #do the math that is always the same first,
     subtotal = 2*l*w + 2*w*h + 2*h*l
+    #then do the one that can change
     subtotal = subtotal + min(l*w, w*h, h*l)
-    #if statements are annoying, let's skip em
-    #if l > w and l > h:
-    #  subtotal = 2*l*w + 2*w*h + 2*h*l + w*h
-    #elif w > l and w > h:
-    #  subtotal = 2*l*w + 2*w*h + 2*h*l + l*h
-    #else:
-    #  subtotal = 2*l*w + 2*w*h + 2*h*l + l*w
-    
-    
+    total = total + subtotal
+  f.close()
+  return total
+
+def calc_ribbon(filename):
+  #literally just steal the first method until the maths
+  l = 0
+  w = 0
+  h = 0
+  total = 0
+  f = open(filename, 'rU')
+  for line in f:
+    line = line.strip()
+    line_split = line.split("x")
+    if len(line_split) > 3:
+      print "Error: Input must be in the form LxHxW"
+      sys.exit(0)
+    l = int(line_split[0])
+    w = int(line_split[1])
+    h = int(line_split[2])
+    #new math goes here: do the static formula first...
+    subtotal = l*w*h
+    #then the variable one
+    subtotal = subtotal + min((l+l+w+w), (w+w+h+h), (h+h+l+l))
     total = total + subtotal
   f.close()
   return total
@@ -47,10 +63,11 @@ def main():
     print 'Please specify an input file'
     sys.exit(1)
   
-  paper = calc_order(sys.argv[1])
-  print "Santa's elves must order " + str(paper) + " sq.ft. of paper."
+  #paper = calc_paper(sys.argv[1])
+  #print "Santa's elves must order " + str(paper) + " sq.ft. of paper."
 
-  
+  ribbon = calc_ribbon(sys.argv[1])
+  print "Santa's elves must order " + str(ribbon) + " ft. of ribbon."
 
 if __name__ == '__main__':
   main()
